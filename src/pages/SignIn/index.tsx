@@ -1,8 +1,23 @@
-import "./styles.scss";
 import { GoogleLogo } from "phosphor-react";
 
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth } from "../../services/firebase";
+// signInWithPopup - Abri uma janela para selecionar a conta para autênticar
+
+import "./styles.scss";
+
 export function SignIn() {
-  function handleGoogleSignIn() {}
+  function handleGoogleSignIn() {
+    const provider = new GoogleAuthProvider();
+
+    signInWithPopup(auth, provider)
+      //auth = parâmetros de autênticação
+      //provider = provedor de autênticação
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => console.log(error));
+  }
 
   return (
     <div className="container">
