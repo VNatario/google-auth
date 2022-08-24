@@ -2,6 +2,8 @@ import "./styles.scss";
 import { GoogleLogo } from "phosphor-react";
 
 export function SignIn() {
+  function handleGoogleSignIn() {}
+
   return (
     <div className="container">
       <h1>Acesse sua conta</h1>
@@ -12,7 +14,7 @@ export function SignIn() {
         sem fazer cadastro.
       </span>
 
-      <button type="button" className="button">
+      <button type="button" className="button" onClick={handleGoogleSignIn}>
         <GoogleLogo size={24} />
         Entrar com o Google
       </button>
