@@ -1,12 +1,15 @@
 import { GoogleLogo } from "phosphor-react";
 
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup, User } from "firebase/auth";
 import { auth } from "../../services/firebase";
 // signInWithPopup - Abri uma janela para selecionar a conta para autênticar
 
 import "./styles.scss";
+import { useState } from "react";
 
 export function SignIn() {
+  const [user, setUser] = useState<User>({} as User);
+
   function handleGoogleSignIn() {
     const provider = new GoogleAuthProvider();
 
@@ -14,13 +17,19 @@ export function SignIn() {
       //auth = parâmetros de autênticação
       //provider = provedor de autênticação
       .then((result) => {
-        console.log(result);
+        setUser(result.user);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.error(error));
   }
 
   return (
     <div className="container">
+      <div className="user">
+        {user.photoURL && <img src={user.photoURL} alt="Foto do usuário" />}
+        <strong>{user.displayName}</strong>
+        <small>{user.email}</small>
+      </div>
+
       <h1>Acesse sua conta</h1>
 
       <span>
